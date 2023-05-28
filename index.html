@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <form onsubmit="takevalue(event)">
+            <i class=""></i>
+            <div class="input">
+                <label>Name</label>
+                <input type="text" placeholder="Enter your name" id="name">
+            </div>
+
+            <div class="input">
+                <label>Email</label>
+                <input type="text" placeholder="abc@gmail.com" id="email">
+            </div>
+
+            <div class="input">
+                <label>Website</label>
+                <input type="text" placeholder="https://www.lgm.com" id="website">
+            </div>
+
+            <div class="input-data">
+                <label>Gender</label>
+                <input type="radio" id="Male" name="gender" value="Male">
+                <label for="Male">Male</label>
+                <input type="radio" id="Female" name="gender" value="Female">
+                <label for="Female">Female</label>
+
+            </div>
+            <div class="input-data">
+                <label>Skills</label>
+                <input type="checkbox" id="html" name="Skills" value="html">
+                <label for="html">HTML</label>
+                <input type="checkbox" id="css" name="Skills" value="css">
+                <label for="css">CSS</label>
+                <input type="checkbox" id="JavaScript" name="Skills" value="JavaScript">
+                <label for="JavaScript">JavaScript</label>
+            </div>
+            <button type="submit">Enroll Student</button>
+            <button type="button" onclick="clearForm()">Clear</button>
+        </form>
+        <div class="vl"></div>
+        <div class="v2" id="output"></div>
+    </div>
+
+    <script>
+        function takevalue(event) {
+            event.preventDefault(); // Prevent form submission
+
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var website = document.getElementById("website").value;
+            var gender = document.querySelector('input[name="gender"]:checked');
+            var skills = document.querySelectorAll('input[name="Skills"]:checked');
+
+            var output = document.getElementById("output");
+            var paragraph = document.createElement("p");
+
+            paragraph.innerHTML = "Name: " + name + "<br>Email: " + email + "<br>Website: " + website + "<br>Gender: " + (gender ? gender.value : "Not selected") + "<br>Skills: " ;
+            output.appendChild(paragraph);
+        
+        if (skills.length === 0) {
+        paragraph.innerHTML += "None selected";
+    } else {
+        skills.forEach(function(skill) {
+            paragraph.innerHTML += skill.value + ", ";
+        });
+        paragraph.innerHTML = paragraph.innerHTML.slice(0, -2); // Remove the trailing comma and space
+    }
+
+    output.appendChild(paragraph);
+}
+        
+        function clearForm() {
+            document.getElementById("name").value = "";
+            document.getElementById("email").value = "";
+            document.getElementById("website").value = "";
+            document.getElementById("gender").value = "";
+        }
+    </script>
+</body>
+
+</html>
